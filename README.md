@@ -3,6 +3,8 @@ Creates audio from media files for language immersion
 
 ## Warning: This tool is still in Beta! Don't use this unless you know what you are doing yet!
 
+![](https://i.imgur.com/YES6QqX.png) ![](https://i.imgur.com/ehJOtsi.png)
+
 ## How to run:
 - Install ffmpeg
 - Install python3 and the following modules
