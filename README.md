@@ -5,7 +5,12 @@ Creates audio from media files for language immersion
 
 ![](https://i.imgur.com/YES6QqX.png) ![](https://i.imgur.com/ehJOtsi.png)
 
-## How to run:
+## How to run
+- Check if there is a release available for your operating system on the [releases page](https://github.com/RicBent/ImmersionAudioTool/releases/)
+- If there is one, download it, extract it and run the executable
+- If not, see "How to run from source"
+
+## How to run from source:
 - Install ffmpeg
 - Install python3 and the following modules
     - PyQt5
@@ -28,5 +33,4 @@ Creates audio from media files for language immersion
 ## Todo:
 - Sanitize subs from any non spoken content
 - Proper checks when ffmpeg errors out
-- Provide easier way to run (pack into executable?)
 - Clean up this readme when I'm not tired
