@@ -10,6 +10,7 @@ from PyQt5.QtCore import Qt, pyqtSignal
 
 import subtitles
 import converter
+import ffmpeg
 
 
 def natural_sort(l): 
@@ -64,7 +65,7 @@ class FileSelector_Widget(QWidget):
             new_path = QFileDialog.getOpenFileName(self, self.title, self.path(), self.filter)
         else:
             new_path = QFileDialog.getSaveFileName(self, self.title, self.path(), self.filter)
-        if new_path:
+        if new_path[0]:
             self.line_edit.setText(new_path[0])
 
     def path(self):
@@ -312,10 +313,19 @@ class MainWindow(QMainWindow):
 
 def main(argv):
     app = QApplication(argv)
+    app.setOrganizationName("RicBent")
+    app.setOrganizationDomain("http://bent.smbnext.net/")
+    app.setApplicationName('ImmersionAudioTool')
+
+    if not ffmpeg.init():
+        return 0
+
     window = MainWindow()
     window.show()
+
     return app.exec_()
+
 
 if __name__ == '__main__':
     ret = main(sys.argv)
-    exit(ret)
+    sys.exit(ret)

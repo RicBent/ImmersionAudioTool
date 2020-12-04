@@ -7,9 +7,9 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
 import subtitles
+import ffmpeg
 
 
-ffmpeg = 'ffmpeg'
 Job = namedtuple('Job', 'media_file subtitle_file output_file')
 Options = namedtuple('Options', 'join_secs pre_pad post_pad')
 Metadata = namedtuple('Metadata', 'album album_art')
@@ -91,23 +91,23 @@ class ConverterThread(QThread):
 
                     part_out_path = tmp_path + F'/part{i}.mp3'
 
-                    subprocess.call([ffmpeg, '-loglevel', 'panic',
-                                             '-ss', subtitles.secs_to_strtime(encode_start),
-                                             '-i', job.media_file,
-                                             '-t', subtitles.secs_to_strtime(encode_end),
-                                             '-q:a', '0', '-map', 'a',
-                                             part_out_path])
+                    ffmpeg.call('-loglevel', 'panic',
+                                '-ss', subtitles.secs_to_strtime(encode_start),
+                                '-i', job.media_file,
+                                '-t', subtitles.secs_to_strtime(encode_end),
+                                '-q:a', '0', '-map', 'a',
+                                part_out_path)
                     
                     part_list_f.write(F'file \'{part_out_path}\'\n')
                 
                 part_list_f.close()
 
-                subprocess.call([ffmpeg, '-loglevel', 'panic',
-                                         '-f', 'concat', '-safe', '0',
-                                         '-i', part_list_path,
-                                         '-c', 'copy',
-                                         '-y',
-                                         job.output_file])
+                ffmpeg.call('-loglevel', 'panic',
+                            '-f', 'concat', '-safe', '0',
+                            '-i', part_list_path,
+                            '-c', 'copy',
+                            '-y',
+                            job.output_file)
 
                 if os.path.isfile(job.output_file) and job.output_file.endswith('.mp3'):
                     mp3file = eyed3.load(job.output_file)

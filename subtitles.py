@@ -54,7 +54,7 @@ def parse_file(path):
 
 
 def parse_file_srt(path):
-    f = open(path, 'r')
+    f = open(path, 'r', encoding='utf-8')
 
     lines = []
     for l in f:
@@ -74,7 +74,7 @@ def parse_file_srt(path):
 
 
 def parse_file_ass(path):
-    f = open(path, 'r')
+    f = open(path, 'r', encoding='utf-8')
 
     in_events = False
     for l in f:
