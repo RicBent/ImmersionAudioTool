@@ -71,7 +71,7 @@ class ConverterThread(QThread):
                     else:
                         i += 1
 
-                part_list_path = tmp_path + '/part_list.txt'
+                part_list_path = os.path.join(tmp_path, 'part_list.txt')
                 part_list_f = open(part_list_path, 'w')
 
                 num_parts = len(parts)
@@ -89,7 +89,7 @@ class ConverterThread(QThread):
                     encode_start = max(start - self.options.pre_pad, 0)
                     encode_end = end-start + self.options.pre_pad + self.options.post_pad
 
-                    part_out_path = tmp_path + F'/part{i}.mp3'
+                    part_out_path = os.path.join(tmp_path, F'part{i}.mp3')
 
                     ffmpeg.call('-loglevel', 'panic',
                                 '-ss', subtitles.secs_to_strtime(encode_start),

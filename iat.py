@@ -302,7 +302,7 @@ class MainWindow(QMainWindow):
         files = []
 
         for file_name in os.listdir(dir_path):
-            file_path = dir_path + '/' + file_name
+            file_path = os.path.join(dir_path, file_name)
             if os.path.isfile(file_path):
                 if file_name.startswith(parts[0]) and file_name.endswith(parts[1]):
                     files.append(file_path)
